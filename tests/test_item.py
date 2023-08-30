@@ -3,6 +3,7 @@
 # Импорт класса Item из вашего модуля
 from src.item import Item
 
+
 # Тест на расчет общей стоимости товара
 def test_calculate_total_price():
     item = Item("Товар 1", 100, 5)
@@ -27,3 +28,8 @@ def test_apply_discount_rate():
     item.apply_discount()
     assert item.price == 180
 
+# Тестирование метода string_to_number
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
