@@ -17,17 +17,30 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self._name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        '''
+        Создание машического метода repr
+        '''
+        return f"{self.__class__.__name__}({self.__name}, {self.price}, {self.quantity})"
+
+    def __str__(self):
+        '''
+        Создание метода repr
+        '''
+        return f'{self.__name}'
+
 
     @property
     def name(self):
         '''
         Создание приватного аттрибута name
         '''
-        return self._name
+        return self.__name
 
     @name.setter
     def name(self, value):
@@ -35,9 +48,9 @@ class Item:
         Обрезает длину наименования до 10 символов
         '''
         if len(value) > 10:
-            self._name = value[:10]
+            self.__name = value[:10]
         else:
-            self._name = value
+            self.__name = value
 
     def calculate_total_price(self) -> float:
         """
