@@ -30,10 +30,9 @@ class Item:
 
     def __str__(self):
         '''
-        Создание метода repr
+        Создание метода str
         '''
         return f'{self.__name}'
-
 
     @property
     def name(self):
@@ -86,3 +85,14 @@ class Item:
         Cтатический метод, возвращающий число из числа-строки
         '''
         return int(float(string))
+
+    def __add__(self, other):
+        '''
+           Добавляем магический метод сложения add
+           Реализуем проверку сложения `Phone` или `Item`
+           с экземплярами не `Phone` или `Item` классов.
+        '''
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise ValueError("Нельзя сложить Item с объектом другого типа")

@@ -2,6 +2,7 @@
 
 # Импорт класса Item из вашего модуля
 from src.item import Item
+from src.phone import Phone
 
 
 # Тест на расчет общей стоимости товара
@@ -43,3 +44,11 @@ def test_str():
     item = Item("Смартфон", 10000, 20)
     expected_str = "Смартфон"
     assert str(item) == expected_str
+
+def test_item_addition():
+    item1 = Item("Item 1", 10, 5)
+    item2 = Item("Item 2", 20, 3)
+    phone = Phone("Phone", 200, 2, 1)
+
+    assert item1 + item2 == 8
+    assert item1 + phone == 7
