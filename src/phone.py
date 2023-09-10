@@ -12,21 +12,19 @@ class Phone(Item):
         super().__init__(name, price, quantity)
         self.number_of_sim = number_of_sim
 
+    @property
+    def number_of_sim(self):
+        return self._number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, number_of_sim):
+        if isinstance(number_of_sim, int) and number_of_sim > 0:
+            self._number_of_sim = number_of_sim
+        else:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+
     def __repr__(self):
         '''
         Добавляем магический метод repr
         '''
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
-
-    def __add__(self, other):
-        '''
-        Добавляем магический метод сложения add
-        Реализуем проверку сложения `Phone` или `Item`
-        с экземплярами не `Phone` или `Item` классов.
-        '''
-        if isinstance(other, Phone):
-            return self.quantity + other.quantity
-        elif isinstance(other, Item):
-            return self.quantity + other.quantity
-        else:
-            raise ValueError("Нельзя сложить Phone с объектом другого типа")
