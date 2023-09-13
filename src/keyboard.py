@@ -5,23 +5,25 @@ class MixinLog:
     Миксин для хранения и изменения раскладки клавиатуры
     '''
     def __init__(self):
-        self._language = 'EN'
+        self.__language = 'EN'
 
     @property
     def language(self):
         '''
         Приватный метод для хранения свойства language
         '''
-        return self._language
+        return self.__language
 
     def change_lang(self):
         '''
         Метод для изменения раскладки клавиатуры
         '''
-        if self._language == 'EN':
-            self._language = 'RU'
+        if self.__language == 'EN':
+            self.__language = 'RU'
+            return self.__language
         else:
-            self._language = 'EN'
+            self.__language = 'EN'
+            return self.__language
 
 class Keyboard(Item, MixinLog):
     def __init__(self, name, price, quantity):
@@ -30,6 +32,3 @@ class Keyboard(Item, MixinLog):
         '''
         super().__init__(name, price, quantity)
         MixinLog.__init__(self)
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.language})"
