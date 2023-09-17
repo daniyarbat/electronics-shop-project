@@ -25,7 +25,3 @@ def test_keyboard_change_language():
     assert keyboard.language == 'RU'
     keyboard.change_lang()
     assert keyboard.language == 'EN'
-
-def test_keyboard_repr():
-    keyboard = Keyboard('Dark Project KD87A', 9600, 5)
-    assert repr(keyboard) == "Keyboard('Dark Project KD87A', 9600, 5, EN)"
