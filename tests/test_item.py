@@ -87,3 +87,21 @@ def test_instantiate_csv_error_message():
     # Проверяем сообщение об ошибке в InstantiateCSVError
     error = InstantiateCSVError("Файл item.csv поврежден")
     assert str(error) == "Файл item.csv поврежден"
+
+def test_instantiate_from_csv_corrupted_file():
+    # Создаем временный CSV файл с поврежденными данными
+    with open('corrupted_items.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(['name', 'price'])
+        writer.writerow(['Item 1', '10.0'])
+    try:
+        Item.instantiate_from_csv(os.path.abspath('corrupted_items.csv'))
+    except InstantiateCSVError:
+        # Проверяем, что метод выбросил исключение InstantiateCSVError
+        pass
+    else:
+        # Если исключение не было выброшено, то тест не прошел
+        assert False, "Ожидалось, что метод выбросит InstantiateCSVError"
+    os.remove('corrupted_items.csv')
+
+
